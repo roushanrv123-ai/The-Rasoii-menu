@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Rasoii – Menu, About, Contact</title>
+<style>
+:root{--bg:#eef6fc;--card:#fff;--ink:#191923;--mute:#55596a;--blue:#2e7dc8;--red:#b03026;--line:#cfe0ef}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--card:#1a212b;--ink:#eef1f5;--mute:#a4adbb;--blue:#6aaeea;--red:#f07a6e;--line:#2b3644}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{text-align:center;padding:22px 16px 14px;border-bottom:3px solid var(--blue);background:var(--card)}
+header small{display:block;color:var(--mute);font-size:15px}
+header h1{margin:0;font-size:44px;letter-spacing:1px;color:var(--red);line-height:1.1}
+header p{margin:6px 0 0;color:var(--mute);font-size:14px}
+nav{display:flex;gap:6px;padding:10px;position:sticky;top:0;background:var(--bg);z-index:5}
+nav button{flex:1;padding:10px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:600 14px inherit;font-family:inherit;cursor:pointer}
+nav button[aria-selected=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+nav button:focus-visible,a.btn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+main{max-width:720px;margin:0 auto;padding:0 12px 28px}
+section{display:none}section.on{display:block}
+.box{background:var(--card);border-radius:20px;padding:20px;margin-top:6px}
+h2{margin:0 0 8px;font-size:22px;color:var(--blue)}
+p{margin:0 0 10px}.mute{color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+a.btn{display:inline-block;padding:12px 20px;border-radius:999px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600}
+a.btn.wa{background:#1f9d55}
+iframe{width:100%;height:calc(100vh - 190px);min-height:480px;border:0;border-radius:16px;background:var(--card)}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:0 12px 24px}
+</style>
+</head>
+<body>
+<header>
+  <small>The</small>
+  <h1>RASOII</h1>
+  <p>Welcome to a world of authentic flavours</p>
+</header>
+
+<nav role="tablist" aria-label="Rasoii sections">
+  <button role="tab" aria-selected="true" data-t="menu">Menu</button>
+  <button role="tab" aria-selected="false" data-t="about">About us</button>
+  <button role="tab" aria-selected="false" data-t="contact">Contact</button>
+  <button role="tab" aria-selected="false" data-t="find">Find us</button>
+</nav>
+
+<main>
+  <section id="menu" class="on">
+    <iframe src="https://roushanrv123-ai.github.io/rasoii-menu/" title="The Rasoii dine-in menu" loading="lazy"></iframe>
+    <p class="mute" style="margin-top:10px;font-size:13px">Menu not loading? <a href="https://roushanrv123-ai.github.io/rasoii-menu/" style="color:var(--blue)">Open the menu in a new page</a>.</p>
+  </section>
+
+  <section id="about">
+    <div class="box">
+      <h2>About us</h2>
+      <p>The Rasoii serves authentic flavours in a relaxed dine-in setting. Tell us how spicy you like your food and we will cook it your way.</p>
+      <p><strong>Our Loyalty Club:</strong> share your name and contact number to earn 10% reward points on your next visit.</p>
+      <p class="mute">5% GST included in all menu prices.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="box">
+      <h2>Contact us</h2>
+      <p>Call or WhatsApp us to order or enquire.</p>
+      <p><strong>+91 76679 46304</strong></p>
+      <div class="btns">
+        <a class="btn" href="tel:+917667946304">Call now</a>
+        <a class="btn wa" href="https://wa.me/917667946304">Message on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="find">
+    <div class="box">
+      <h2>Find us</h2>
+      <p>Above Karnataka Cafe,<br>New Market Road, Katihar</p>
+      <div class="btns">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=The+Rasoii+Above+Karnataka+Cafe+New+Market+Road+Katihar" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>Thank you for dining with us.</footer>
+
+<script>
+const tabs=[...document.querySelectorAll('nav button')];
+function show(id){
+  if(!document.getElementById(id))id='menu';
+  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));
+}
+tabs.forEach(b=>b.addEventListener('click',()=>{show(b.dataset.t);history.replaceState(null,'','#'+b.dataset.t)}));
+show(location.hash.slice(1));
+</script>
+</body>
+</html>
